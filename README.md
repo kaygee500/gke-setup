@@ -10,11 +10,10 @@ GKE clusters can be created using the following modes of operation. This determi
 
 * Standard Cluster: Google Cloud manges the control plane whilst the customer manages the underlying infrastructure (Nodes, scaling etc)
 
+##### Summary of differences beteen modes
 ![Autopilot vs Standard](./img/clustermode.png)
 
-Main differences between the cluster mode is below. 
-
-Refer to [GKE Cluster Mode](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture?_ga=2.208064722.-1396940121.1686217398) for more information.
+More inforation on the modes can be found in [GKE Cluster Mode](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture?_ga=2.208064722.-1396940121.1686217398) 
 
 ### Network isolation choices
 These determin how your cluster's workloads are accessed over the networks. Routes are not created automatically.
@@ -42,11 +41,10 @@ Each node can have 75 pods                200×75 = 15000 . So we will /18 secon
 (Secondary range – Pod network)	          172.16.0.0/18 (172.16.0.0 – 172.16.63.255)
 
 cluster should support 2000 services      Hence we need a /21 range for the service network. Assuming we continue from the pod range, 
-(Secondary range – Service network)	      it would be 172.16.64.0/20 (172.16.64.0 – 172.16.79.255) 
+(Secondary range – Service network)	   it would be 172.16.64.0/20 (172.16.64.0 – 172.16.79.255) 
 ```
 
 Finally we have arrived to the following network ranges.
-
 1.  Primary subnet (For Cluster Nodes) – 10.0.1.0/24
 2.  Secondary network (For pods) – 172.16.0.0/18
 3.  Secondary network (For services) – 172.16.64.0/20
@@ -55,8 +53,9 @@ Finally we have arrived to the following network ranges.
 ## Ways for creating a GKE cluster
 
 ### Assumptions
-    1. You have enabled the necessary APIs(i.e. GKE API) in your GCP account
-    2. You have the neccessary Admin Priviledges
+1. You have enabled the necessary APIs(i.e. GKE API) in your GCP account
+2. You have the neccessary Admin Priviledges
+3. You know how to execute a shell script (*.sh files)
 
 ### Setup Options
 #### 1. Cloud Console 

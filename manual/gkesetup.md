@@ -1,4 +1,4 @@
-# Create VPC With GKE Subnet & Secondary IP Ranges
+# Create the GKE VPC Network with Subnet & Secondary IP Ranges
   ## 1. Create a VPC
 Create a vpc network named `gke-network`
 ``` Shell
@@ -13,14 +13,13 @@ gcloud compute networks subnets create gke-subnet-a \
     --range 10.0.1.0/24 \
     --secondary-range pod-network=172.16.0.0/18,service-network=172.16.64.0/20
 ```
-By default the subnet creates a route to the internet gateway and enabling internet access for the nodes. However, a custom firewall rules is needed to workloads through the nodes (NodePort) from outside the VPC network.
+Now we have the necessary network infrastructure to deploy a public GKE cluster. By default the subnet creates a route to the internet gateway and enabling internet access for the nodes. However, a custom firewall rules is needed to workloads through the nodes (NodePort) from outside the VPC network.
 
-##### `Note:` _When running production workloads, careful consideration has been given to the network design by keeping the subnets fully private without internet gateways. Hence consider a private cluster over a plublic cluster_
+#### `Note:` _When running production workloads, careful consideration has been given to the network design by keeping the subnets fully private without internet gateways. Hence consider a private cluster over a plublic cluster_
 
-Now we have the necessary network infrastructure to deploy a public GKE cluster.
 
 # Setting Up Kubernetes Cluster On Google Cloud
-  ### 1 Create GKE cluster
+  ## 1. Create GKE cluster
 Use the gcloud CLI to launch a regional multi-zone cluster. Alternatively you can use Cloud SDK
 ``` shell
 gcloud container clusters create demo-gke \
@@ -53,29 +52,27 @@ On a successful execution, you will see the cluster details in the output as sho
 
 _This spin up the cluster in us-central1 the region g1-small(1.7GB) machine type with autoscaling enabled. Preemptible VMs with autoscaling to a maximum of three-node per to reduce the cost of the cluster. The cluster is deployed with the VPC network you created. Note: When deploying a cluster in production, more configurations need to be considered for the network and the cluster. It depends on the organizational policy and project requirements._
 
-  ## 2: Verify the  GKE cluster information
+  ## 2. Verify the  GKE cluster information
 ``` Shell 
 gcloud container clusters describe  demo-gke --region=us-central1
 ```
 
-  ## 3: Connect to the cluster using  we need to download the cluster kubeconfig to our location workstation.
+  ## 3. Connect to the cluster using  we need to download the cluster kubeconfig to our location workstation.
 ``` Shell
 gcloud container clusters get-credentials demo-gke  --region=us-central1
 ```
-This generates the kubeconfig and adds it to the ~/.kube/config file.
-
-You can also get the connect command from the GKE GUI(i.e. the Cloud Console).
+This generates the kubeconfig and adds it to the ~/.kube/config file. You can also get the connect command from the GKE GUI(i.e. the Cloud Console).
 
 
 # Deploy Nginx on GKE for Validation
 Let’s deploy a sample Nginx application in a custom namespace to validate the cluster.
 
-  ## 1: Create a namespace named demo
+  ## 1. Create a namespace named demo
 ``` Shell
 kubectl create namespace demo
 ```
 
-  ## 2: Let’s deploy a sample Nginx app in the demo namespace. Also, create a Nodeport service for testing purposes.
+  ## 2. Let’s deploy a sample Nginx app in the demo namespace. Also, create a Nodeport service for testing purposes.
 ``` Shell
 cat <<EOF | kubectl apply -f -
 ---
@@ -116,15 +113,15 @@ spec:
 EOF
 ```
 
-  ## 3; Check the deployment status.
+  ## 3. Check the deployment status.
 ``` Shell
 kubectl get deployments -n demo
 ```
-  ## 4: Describe the service and check the nodePort details.
+  ## 4. Describe the service and check the nodePort details.
 ``` Shell
 kubectl describe svc nginx-service -n demo
 ```
-  ## 5: Create a firewall rule to access the app.
+  ## 5. Create a firewall rule to access the app.
 ``` Shell
 gcloud compute firewall-rules create gke-webapps \
     --network=gke-network \
@@ -136,15 +133,15 @@ gcloud compute firewall-rules create gke-webapps \
 ```
 This will allow access to the application on node port 32000 from the the internet. This rule is applicable for all instances with gke-webapps tag in gke-network
 
-  ## 6: Retrieve the External IP address of a Node
+  ## 6. Retrieve the External IP address of a Node
   Grab one IP and try accessing port 32000 and see if you can access the Nginx page.
 ``` Shell
 gcloud compute instances list --filter="name~'gke-demo-*'"
 ```
-  ## 7: Goto <http://Node External IP>:32000
+  ## 7. Goto <http://Node External IP>:32000
 
 
-  ## 8: Expose Nginx as a Loadbalancer Service
+  ## 8. Expose Nginx as a Loadbalancer Service
 ``` Shell
 cat << EOF | kubectl apply -f -
 apiVersion: v1
@@ -166,14 +163,15 @@ GKE will create a Loadbancer that points to the Nginx service endpoint.
 # Clean up 
 It is good to clean up the infrastructure once you are done to avoid unessary charges
 
-  ## 1: Delete GKE Cluster
+  ## 1. Delete GKE Cluster
 ``` Shell
 gcloud container clusters delete demo-gke --region us-central1  --quiet
 ```
 
-  ## 2: Delete the firewall rule
+  ## 2. Delete the firewall rule
 ``` Shell
 gcloud compute firewall-rules delete gke-webapps --quiet
 ```
-### ............ You'v completed the lab. Congratulations!!! ................... 
+
+###............ You've completed the lab. Congratulations!!! ................... 
 ### ............................... END ........................................

@@ -11,4 +11,4 @@ Public GKE cluster: Control plane node is publicly accessible, and all the worke
 
 Private GKE Cluster: The control plan and worker nodes get deployed in a predefined VPC network range defined by the user. The access to the cluster components will be completely private through VPC networks. Even though the control plane gets launched in the CIDR given by the user, that VPC gets created and managed by google cloud. We can only control the worker node subnets.
 
-The cluster can be setup manually using the steps in the Manual Setup.md file. Alternatively you can automate the creation of the cluster using a Shell script or Terraform. 
+The cluster can be setup manually using the steps in ./manual file. Alternatively you can automate the creation ./02.shell or ./03.terraform. 

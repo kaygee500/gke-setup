@@ -1,18 +1,26 @@
+#!/bin/bash
 
-# Clean up 
-It is good to clean up the infrastructure once you are done to avoid unessary charges
-
+echo "---------------------  CLEAN-UP  --------------------------"
+echo ""
+echo "................ Deleting GKE Cluster ............!" 
   ## 1. Delete GKE Cluster
 ``` Shell
 gcloud container clusters delete demo-gke --region us-central1  --quiet
 ```
+echo "--------------------- CLUSTER DELETED ----------------------"
 
-  ## 2. Delete the firewall rule
+echo ""
+echo "................ Deleting firewall rule ............!" 
+
 ``` Shell
 gcloud compute firewall-rules delete gke-webapps --quiet
 ```
+echo "----------------- FIREWALL RULE DELETED  --------------------"
+
+echo ""
+echo ""
 echo "--------------------------------------------------------------------"
 echo "|......... You've completed the lab. Congratulations!!! ...........|" 
 echo "--------------------------------------------------------------------"
 
-echo "------------------------     THE END     -----------------------------"
+echo "------------------------   THE END     -----------------------------"

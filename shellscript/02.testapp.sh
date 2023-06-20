@@ -53,5 +53,5 @@ EOF
 echo "--------------------- TESTAPP DEPLOYED--------------------------"
 
 echo " "
-echo "--------------------- Refer to README --------------------------"
+echo "----------------- Refer to README for next steps --------------------------"
 echo " "

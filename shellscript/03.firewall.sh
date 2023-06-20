@@ -2,7 +2,7 @@
 echo "--------------------- FIREWALL RULE  --------------------------"
 
 echo ""
-echo "............... Creating a firewall rule to access the app .....!                       |" 
+echo "............... Creating a firewall rule to access the app .....!" 
 gcloud compute firewall-rules create gke-webapps \
     --network=gke-network \
     --allow=tcp:32000 \

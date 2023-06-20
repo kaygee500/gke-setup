@@ -51,5 +51,5 @@ gcloud container clusters create demo-gke \
 
 echo "--------------------- CLUSTER CREATED --------------------------"
 echo " "
-echo "--------------------- NEXT execute 02.testapp.sh --------------------------"
+echo "----------------- Refer to README for next steps --------------------------"
 echo " "

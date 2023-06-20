@@ -50,7 +50,7 @@ Finally we have arrived to the following network ranges.
 3.  Secondary network (For services) – 172.16.64.0/20
 
 
-## Ways for creating a GKE cluster
+## 4 Ways for creating a GKE cluster
 
 ### Assumptions
 1. You have enabled the necessary APIs(i.e. GKE API) in your GCP account
@@ -63,6 +63,13 @@ A simple web-based graphical user interface helps you create and manage projects
 
 #### 2. Mannual Steps
 The manual steps invole the sequence of `commands` in ./manual/gkesetup.md using either [Cloud Shell](https://cloud.google.com/shell) or [Cloud SDK](https://cloud.google.com/sdk). 
+
+#### 3. Scripting
+This attempts at automating step2 above using scripting. The sripts are suited for Cloud Shell or Cloud SDK on Linux as they both support bash. If you are using Windows ensure you Linux Bash enabled.
+
+#### 4. Terraform
+This takes the sripting furhter through full automation with Terraform. HashCorp Terraform is an open-source infrastructure as code tool that enables you to safely and predictably provision and manage infrastructure in any cloud. After you have [setup terraform](https://developer.hashicorp.com/terraform/downloads?product_intent=terraform), you can use or adapt the code in ./terraform folder.
+
 
 ## Conclusion
 It is easy to set uo a GKE cluster. In the real world many configurations from a security, scalability, and networking need to be considered. For more details refer to [GKE Security Concepts](https://cloud.google.com/kubernetes-engine/docs/concepts/security-overview).

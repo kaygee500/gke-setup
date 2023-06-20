@@ -48,7 +48,7 @@ gcloud container clusters create demo-gke \
       --master-authorized-networks=0.0.0.0/0
 ```
 On a successful execution, you will see the cluster details in the output as shown
-![Info](../img/setup.webp)
+![Info](../img/setup.png)
 
 _This spin up the cluster in us-central1 the region g1-small(1.7GB) machine type with autoscaling enabled. Preemptible VMs with autoscaling to a maximum of three-node per to reduce the cost of the cluster. The cluster is deployed with the VPC network you created. Note: When deploying a cluster in production, more configurations need to be considered for the network and the cluster. It depends on the organizational policy and project requirements._
 

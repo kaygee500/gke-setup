@@ -16,7 +16,7 @@ gcloud compute firewall-rules delete gke-webapps --quiet
 echo "----------------- FIREWALL RULE DELETED  --------------------"
 
 echo ""
-echo "................  Deleting thenetwork   ............!" 
+echo "................  Deleting the network   ............!" 
 
 gcloud compute networks delete gke-network --quiet
 

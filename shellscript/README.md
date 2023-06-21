@@ -12,10 +12,8 @@ gcloud container clusters get-credentials demo-gke  --region=us-central1
 This generates the kubeconfig and adds it to the ~/.kube/config file. You can also get the connect command from the GKE GUI(i.e. the Cloud Console).
 
 
-# Step 2: Execute the scripts in the following order:
-- 02.testapp.sh
- 
-a.  Check the deployment status.
+# Step 2: Execute the script `02.testapp.sh`
+ a.  Check the deployment status.
 ``` Shell
 kubectl get deployments -n demo
 ```
@@ -28,7 +26,9 @@ c. Describe the service and check the nodePort details.
 ``` Shell
 kubectl describe svc nginx-service -n demo
 ```
-# Step 3: Execute the scripts in the following order:
-- 03.firewall.sh
-- 04.loadbalancer
-- 05.cleanup
+
+# Step 3: Execute the scripts `03.firewall.sh`
+
+# Step 4: Execute the script `04.loadbalancer`
+
+# Step 5: Execute the script `05.cleanup`

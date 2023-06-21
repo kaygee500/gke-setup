@@ -173,5 +173,10 @@ gcloud container clusters delete demo-gke --region us-central1  --quiet
 gcloud compute firewall-rules delete gke-webapps --quiet
 ```
 
+  ## 2. Delete the network 
+``` Shell
+gcloud compute networks delete gke-network --quiet
+```
+
 ###............ You've completed the lab. Congratulations!!! ................... 
 ### ............................... END ........................................

@@ -18,11 +18,11 @@ More inforation on the modes can be found in [GKE Cluster Mode](https://cloud.go
 ### Network isolation choices
 These determin how your cluster's workloads are accessed over the networks. Routes are not created automatically.
 
-* Public GKE cluster: Control plane node is publicly accessible, and all the worker nodes have a public interface attached to them. In a production environment, exta care must be taken to protect your envionrment. For example, using firewall rules and whitelisting only IP ranges that connect to the cluster API. Other controls will be need to secure your workloads and cluster. Hence, public clusters are normally not part of an organization’s hybrid network due to the fact that the nodes have a public interface.
+* [Public GKE cluster]: Control plane node is publicly accessible, and all the worker nodes have a public interface attached to them. In a production environment, exta care must be taken to protect your envionrment. For example, using firewall rules and whitelisting only IP ranges that connect to the cluster API. Other controls will be need to secure your workloads and cluster. Hence, public clusters are normally not part of an organization’s hybrid network due to the fact that the nodes have a public interface.
 
-* Private GKE Cluster: The worker nodes and pods are assinged internal IP address, hence not accesible over the internet. The access to the cluster components will be completely private through VPC networks. Access to the internet may require a Cloud NAT
+* [Private GKE Cluster]: The worker nodes and pods are assinged internal IP address, hence not accesible over the internet. The access to the cluster components will be completely private through VPC networks. Access to the internet may require a Cloud NAT
 
-`Note:` _You can undo these settings once the cluster is created._
+**Note**: _You can undo these settings once the cluster is created._
 
 
 ## Design Example
@@ -33,16 +33,11 @@ When it comes to the GKE cluster, we need to create a subnet to host the cluster
 
 #### Network requirements.
 
-### Cluster Requirements	                Calculated IP ranges
-``` 
-~ 200 Nodes. (Primary Subnet)	          This means we need a subnet with a minimum of 254 IP addresses. That is 10.0.1.0/24
-
-Each node can have 75 pods                200×75 = 15000 . So we will /18 secondary range that would give 16384 IP addresses. 
-(Secondary range – Pod network)	          172.16.0.0/18 (172.16.0.0 – 172.16.63.255)
-
-cluster should support 2000 services      Hence we need a /21 range for the service network. Assuming we continue from the pod range, 
-(Secondary range – Service network)	   it would be 172.16.64.0/20 (172.16.64.0 – 172.16.79.255) 
-```
+| Cluster Requirements | Calculated IP ranges |
+|----------------------| ---------------------|
+|~ 200 Nodes. (Primary Subnet)| This means we need a subnet with a minimum of 254 IP addresses. That is 10.0.1.0/24|
+|Each node can have 75 pods (Secondary range – Pod network)	| 200×75 = 15000. So we will /18 secondary range that would give 16384 IP addresses.   172.16.0.0/18 (172.16.0.0 – 172.16.63.255)|
+| cluster should support 2000 services (Secondary range – Service network) |Hence we need a /21 range for the service network. Assuming we continue from the pod range, it would be 172.16.64.0/20 (172.16.64.0 – 172.16.79.255) |
 
 Finally we have arrived to the following network ranges.
 1.  Primary subnet (For Cluster Nodes) – 10.0.1.0/24
@@ -62,7 +57,7 @@ Finally we have arrived to the following network ranges.
 A simple web-based graphical user interface helps you create and manage projects and resources. You can deploy, scale, and diagnose production issues with the console. To learn more about the console refer to [cloud-console](https://cloud.google.com/cloud-console) 
 
 #### 2. Mannual Steps
-The manual steps invole the sequence of `commands` in ./manual/gkesetup.md using either [Cloud Shell](https://cloud.google.com/shell) or [Cloud SDK](https://cloud.google.com/sdk). 
+The manual steps invole the sequence of **commands** in [gkesetup.md](./manual/gkesetup.md) using either [Cloud Shell](https://cloud.google.com/shell) or [Cloud SDK](https://cloud.google.com/sdk). 
 
 #### 3. Scripting
 This attempts at automating step2 above using scripting. The sripts are suited for Cloud Shell or Cloud SDK on Linux as they both support bash. If you are using Windows ensure you Linux Bash enabled.

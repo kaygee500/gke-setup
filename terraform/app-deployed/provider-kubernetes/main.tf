@@ -130,9 +130,9 @@ resource "kubernetes_deployment" "nginx_deployment" {
 }
 
 #"......... Expose app on Nodeport ........!"
-resource "kubernetes_service" "nginx_service" {
+resource "kubernetes_service" "nginx_service_np" {
   metadata {
-    name      = "nginx-service"
+    name      = "nginx-service-np"
     namespace = kubernetes_namespace.demo.metadata[0].name
   }
   spec {
@@ -165,7 +165,7 @@ resource "google_compute_firewall" "rules" {
 }
 
 #--------------------- LOADBALANCER SERVICE  --------------------------"
-resource "kubernetes_service" "nginx_service" {
+resource "kubernetes_service" "nginx_service_lb" {
   metadata {
     namespace = kubernetes_namespace.demo.metadata[0].name
     name      = "nginx-service-lb"

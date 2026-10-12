@@ -12,6 +12,7 @@ GKE clusters can be created using the following modes of operation. This determi
 
 ##### Summary of differences beteen modes
 ![Autopilot vs Standard](./img/clustermode.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkaygee500%2Fgke-setup.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkaygee500%2Fgke-setup?ref=badge_shield)
 
 More inforation on the modes can be found in [GKE Cluster Mode](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture?_ga=2.208064722.-1396940121.1686217398) 
 
@@ -71,3 +72,6 @@ It is easy to set uo a GKE cluster. In the real world many configurations from a
 
 ## Acknowldgements 
 This project was based on [this tutorial](https://devopscube.com/setup-kubernetes-cluster-google-cloud/) from [devopscube.com](https://devopscube.com/)
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkaygee500%2Fgke-setup.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkaygee500%2Fgke-setup?ref=badge_large)
